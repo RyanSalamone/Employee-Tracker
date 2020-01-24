@@ -5,11 +5,11 @@ values ('Management'),
        ('Operations'),
        ('Human Resources');
 
-insert into roles(title, salary, department_id) values('Manager', 221032, 1);
-insert into roles(title, salary, department_id) values('Engineer', 32032, 2);
-insert into roles(title, salary, department_id) values('Sales', 2032, 3);
-insert into roles(title, salary, department_id) values('SOC', 1032, 4);
-insert into roles(title, salary, department_id) values('Administration', 2212, 5);
+insert into role(title, salary, department_id) values('Manager', 221032, 1);
+insert into role(title, salary, department_id) values('Engineer', 32032, 2);
+insert into role(title, salary, department_id) values('Sales', 2032, 3);
+insert into role(title, salary, department_id) values('SOC', 1032, 4);
+insert into role(title, salary, department_id) values('Administration', 2212, 5);
 
 INSERT INTO employees(first_name, last_name, role_id, manager_id) VALUES ("Ryan", "Salamone", 1, 1);
 INSERT INTO employees(first_name, last_name, role_id, manager_id) VALUES ("Mickey", "Mouse", 2, 1);

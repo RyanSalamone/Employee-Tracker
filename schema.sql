@@ -3,7 +3,7 @@ CREATE DATABASE employee_tracker;
 
 USE employee_tracker;
 
-CREATE TABLE employee (
+CREATE TABLE employees (
   id INT NOT NULL AUTO_INCREMENT,
   first_name VARCHAR(30) NOT NULL,
   last_name VARCHAR(30) NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE role (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE department (
+CREATE TABLE departments (
   id INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(30) NOT NULL,
   PRIMARY KEY (id)
