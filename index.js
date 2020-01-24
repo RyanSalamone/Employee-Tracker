@@ -74,7 +74,7 @@ function start() {
 //View All Employees Function
 function viewAll() {
       connection.query(
-        "SELECT employees.id, employees.first_name, employees.last_name, employees.role_id, employees.manager_id, role.title, role.salary, role.id, departments.id FROM employees LEFT JOIN role ON employees.role_id = role.id LEFT JOIN department ON role.department_id = department.id", 
+        "SELECT employees.id, employees.first_name, employees.last_name, employees.role_id, employees.manager_id, role.title, role.salary, role.id, departments.id FROM employees LEFT JOIN role ON employees.role_id = role.id LEFT JOIN departments ON role.department_id = departments.id", 
         function(err, result, fields) {
           if (err) throw err;
           console.table(result);
@@ -86,7 +86,7 @@ function viewAll() {
 
  function viewRoles() {
  connection.query(
-"SELECT role.id, role.title, role.salary, role.departments_id, departments.id, departments.name FROM role LEFT JOIN departments on role.departments_id = departments.id",
+"SELECT role.id, role.title, role.salary, role.department_id, departments.id, departments.name FROM role LEFT JOIN departments on role.department_id = departments.id",
  function(err, result, fields) {
      if (err) throw err;
      console.table(result);
@@ -218,7 +218,7 @@ function addRole() {
      //add new employee to the database
     var getDeptId =answer.dept.split("-")
     var query = 
-    `INSERT INTO role (title, salary, departments_id)
+    `INSERT INTO role (title, salary, department_id)
      VALUES ('${answer.role}','${answer.salary}','${getDeptId[0]}')`;
     connection.query(query, function(err, res) {
       console.log(`<br>-----new role ${answer.role} added!------`)
