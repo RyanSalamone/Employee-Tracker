@@ -1,8 +1,8 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
-var cTable = require("console.table")
+var cTable = require("d")
 
-// create the connection information for the sql database
+
 var connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
@@ -11,14 +11,13 @@ var connection = mysql.createConnection({
   database: "employee_tracker"
 });
 
-// connect to the mysql server and sql database
 connection.connect(function(err) {
   if (err) throw err;
-  // run the start function after the connection is made to prompt the user
+  
   start();
 });
 
-// function which prompts the user for what action they should take
+// what would you like to do function
 function start() {
   inquirer
     .prompt({
@@ -38,7 +37,7 @@ function start() {
     })
     .then(function(answer) {
         console.log(answer);
-      // based on their answer, call the function needed
+      
       if (answer.selection === "View All Employees") {
         viewAll();
       }
@@ -104,13 +103,13 @@ function viewAll() {
     }
   ); };
 
-/////////Look Up Functions//////////////
+
 var roleChoices = [];
 var empChoices = [];
 var deptChoices = [];
 
 function lookupRoles(){  
-    //selects all departments, pushes the id and name for each into the array
+    
     connection.query("SELECT * FROM role", function (err, data) {
         if (err) throw err;
         for (i = 0; i < data.length; i++) {
@@ -120,18 +119,15 @@ function lookupRoles(){
     }
 
 function lookupEmployee(){  
-    //selects all departments, pushes the id and name for each into the array
      connection.query("SELECT * FROM employees", function (err, data) {
          if (err) throw err;
          for (i = 0; i < data.length; i++) {
              empChoices.push(data[i].id + "-" + data[i].first_name+" "+ data[i].last_name)
          }
-        //  return empChoices;
      }) 
     }
 
 function lookupDepts(){
-  //selects all departments, pushes the id and name for each into the array
   connection.query("SELECT * FROM departments", function (err, data) {
     if (err) throw err;
     for (i = 0; i < data.length; i++) {
@@ -140,7 +136,6 @@ function lookupDepts(){
 })
 }
 
-//////////Prompt Functions////////////
 function addEmployee() {
 
     lookupRoles()
@@ -174,7 +169,6 @@ function addEmployee() {
       }
     
      ]).then(function(answer) {
-       //add new employee to the database
       var getRoleId =answer.role.split("-")
       var getReportingToId=answer.reportingTo.split("-")
       var query = 
@@ -215,7 +209,6 @@ function addRole() {
   
    ]).then(function(answer) {
      console.log(`${answer.role}`)
-     //add new employee to the database
     var getDeptId =answer.dept.split("-")
     var query = 
     `INSERT INTO role (title, salary, department_id)
@@ -240,7 +233,6 @@ function addDept() {
     message: "Enter the department you would like to add:"
   }
   ]).then(function(answer) {
-     //add new department to the database
     var query = 
     `INSERT INTO departments (name)
      VALUES ('${answer.dept}')`;
